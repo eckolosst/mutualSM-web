@@ -1,0 +1,39 @@
+<mat-nav-list>
+  <a id="titleSide" mat-list-item href="">
+    <p>App-Mutual</p>
+  </a>
+  <mat-divider></mat-divider>
+  <a
+    mat-list-item
+    [routerLink]="['/dashboard']"
+    [routerLinkActive]="['router-link-active']"
+  >
+    <mat-icon>dashboard</mat-icon>
+    <span>Dashboard</span>
+  </a>
+  <mat-divider></mat-divider>
+  <a
+    mat-list-item
+    [routerLink]="['/socio']"
+    [routerLinkActive]="['router-link-active']"
+  >
+    <mat-icon>people</mat-icon>
+    <span>Socios</span>
+  </a>
+  <a
+    mat-list-item
+    [routerLink]="['/prestamo']"
+    [routerLinkActive]="['router-link-active']"
+  >
+    <mat-icon>attach_money</mat-icon>
+    <span>Prestamos</span>
+  </a>
+  <a
+    mat-list-item
+    [routerLink]="['/sol_prestamo']"
+    [routerLinkActive]="['router-link-active']"
+  >
+    <mat-icon>money</mat-icon>
+    <span>Solicitud de Prestamos</span>
+  </a>
+</mat-nav-list>

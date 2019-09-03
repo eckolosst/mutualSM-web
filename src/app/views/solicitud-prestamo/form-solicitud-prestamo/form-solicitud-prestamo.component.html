@@ -1,0 +1,73 @@
+<h4>Nueva solicitud de Prestamo</h4>
+
+<form
+  class="mt-2"
+  [formGroup]="prestamoForm"
+  (ngSubmit)="send()"
+  fxLayout="row wrap"
+  fxLayoutAlign="space-between center"
+>
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="dateP"
+      placeholder="Fecha de Petición"
+      formControlName="fechaPeticion"
+    />
+    <mat-datepicker-toggle matSuffix [for]="dateP"></mat-datepicker-toggle>
+    <mat-datepicker #dateP></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="dateA"
+      placeholder="Fecha de Aprobación"
+      formControlName="fechaAprobacion"
+    />
+    <mat-datepicker-toggle matSuffix [for]="dateA"></mat-datepicker-toggle>
+    <mat-datepicker #dateA></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Socio" name="socio" formControlName="socio">
+      <mat-option *ngFor="let item of socios" [value]="item.id">
+        {{ item.apellido }}, {{ item.nombre }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Garante" name="item" formControlName="socio">
+      <mat-option *ngFor="let item of socios" [value]="item">
+        {{ item.apellido }}, {{ item.nombre }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field fxFlex="40">
+    <input matInput placeholder="monto" value="0" type="number" />
+  </mat-form-field>
+
+  <div>
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="prestamoForm.status == 'INVALID'"
+    >
+      Guardar
+    </button>
+    <span fxFlex="2"></span>
+    <button mat-stroked-button color="warn" (click)="cancel()">Cancelar</button>
+  </div>
+</form>
+
+<!-- numero: number;
+fechaPeticion: Date;
+fechaAprobacionRechazo: Date;
+resultado: string;
+socio: Socio;
+garante: Garante;
+recibos: [Recibo];
+monto: number; -->
