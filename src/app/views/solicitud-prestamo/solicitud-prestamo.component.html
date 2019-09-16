@@ -1,3 +1,14 @@
+<div dir="rtl">
+  <mat-button-toggle-group appearance="legacy">
+    <mat-button-toggle (click)="selectTab('r')">Rechazadas</mat-button-toggle>
+    <mat-button-toggle (click)="selectTab('a')">Aprobadas</mat-button-toggle>
+    <mat-button-toggle (click)="selectTab('p')" checked="true"
+      >Pendientes</mat-button-toggle
+    >
+    <mat-button-toggle (click)="selectTab('x')">Todos</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+
 <button mat-fab color="primary" class="floatButton" (click)="openDialogForm()">
   <mat-icon>add</mat-icon>
 </button>

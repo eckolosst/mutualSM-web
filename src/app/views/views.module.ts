@@ -8,7 +8,11 @@ import {
   MatSelectModule,
   MatFormFieldModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatButtonToggleModule,
+  MatAutocompleteModule,
+  MatCheckboxModule,
+  MatExpansionModule
 } from '@angular/material';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -19,13 +23,15 @@ import { SolicitudPrestamoComponent } from './solicitud-prestamo/solicitud-prest
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormSolicitudPrestamoComponent } from './solicitud-prestamo/form-solicitud-prestamo/form-solicitud-prestamo.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DetalleSocioComponent } from './socio/detalle-socio/detalle-socio.component';
 
 const components = [
   DashboardComponent,
   SocioComponent,
   PrestamoComponent,
   SolicitudPrestamoComponent,
-  FormSolicitudPrestamoComponent
+  FormSolicitudPrestamoComponent,
+  DetalleSocioComponent
 ];
 
 @NgModule({
@@ -39,6 +45,10 @@ const components = [
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatButtonToggleModule,
+    MatAutocompleteModule,
+    MatCheckboxModule,
+    MatExpansionModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
@@ -46,6 +56,6 @@ const components = [
     NgxDatatableModule
   ],
   exports: components,
-  entryComponents: [FormSolicitudPrestamoComponent]
+  entryComponents: [FormSolicitudPrestamoComponent, DetalleSocioComponent]
 })
 export class ViewsModule {}

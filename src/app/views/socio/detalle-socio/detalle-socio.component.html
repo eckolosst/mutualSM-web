@@ -1,0 +1,22 @@
+<h4>{{ data.nombre }} {{ data.apellido }}</h4>
+<div fxLayout="column" fxLayoutAlign="center stretch">
+  <span> <b>DNI:</b> <span fxFlex></span>{{ data.dni }}</span>
+  <br />
+  <span><b>N° Socio:</b> <span fxFlex></span> {{ data.numeroSocio }}</span>
+  <br />
+  <span><b>Email:</b><span fxFlex></span> {{ data.email }}</span>
+  <br />
+  <span
+    ><b>Fecha de Nacimiento:</b><span fxFlex></span>
+    {{ data.fechaNacimiento }}</span
+  >
+  <br />
+  <span><b>Domimcilio:</b> <span fxFlex></span>{{ data.domicilio }}</span>
+  <br />
+  <span><b>Telefono:</b><span fxFlex></span> {{ data.telefono }}</span>
+  <br />
+  <span
+    ><b>Periodo de afiliacion:</b> <span fxFlex></span>{{ data.inicioPeriodo }} -
+    {{ data.finPeriodo }}</span
+  >
+</div>

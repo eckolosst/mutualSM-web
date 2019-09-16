@@ -3,13 +3,14 @@
 <ngx-datatable
   [rows]="rows"
   [columns]="columns"
-  class="material"
+  class="material m-1"
   [columnMode]="'force'"
   [headerHeight]="50"
   [footerHeight]="0"
   [rowHeight]="50"
   [scrollbarV]="true"
   [scrollbarH]="false"
+  (activate)="onActivateRow($event)"
 >
 </ngx-datatable>
 <button mat-fab color="primary" class="floatButton">

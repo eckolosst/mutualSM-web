@@ -5,5 +5,7 @@ import { Periodo } from './periodo';
 export class Socio extends Persona {
   numeroSocio: string;
   cuotas: [Cuota];
-  periodoAfiliacion: Periodo;
+  // periodoAfiliacion: Periodo;
+  inicioPeriodo: Date;
+  finPeriodo: Date;
 }
