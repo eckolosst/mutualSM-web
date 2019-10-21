@@ -11,6 +11,7 @@ import { Socio } from 'src/app/shared/models/socio';
 import { SolicitudPrestamoService } from 'src/app/shared/services/solicitud-prestamo.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { SolicitudPrestamo } from 'src/app/shared/models/solicitud-prestamo';
 
 @Component({
   selector: 'app-form-solicitud-prestamo',
@@ -65,7 +66,7 @@ export class FormSolicitudPrestamoComponent implements OnInit {
     if (this.newGuarantor) {
       // this.garanteService.post();
     }
-    this.solicitudPrestamoService.post();
+    this.solicitudPrestamoService.insertSolicitud(this.prestamoForm.value);
   }
 
   cancel() {
