@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { PrestamoService } from 'src/app/shared/services/prestamo.service';
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 
 const columnas = [
   { prop: 'numero' },
@@ -18,6 +19,7 @@ export class PrestamoComponent implements OnInit {
   public rows;
   public columns;
   public temp;
+  @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
   constructor(private prestamoService: PrestamoService) {
     this.rows = [];
@@ -26,6 +28,7 @@ export class PrestamoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.temp = [...this.prestamoService.getPrestamos()];
     this.rows = this.prestamoService.getPrestamos();
   }
 
@@ -33,11 +36,11 @@ export class PrestamoComponent implements OnInit {
     const val = event.target.value.toLowerCase();
     // filter our data
     const temp = this.temp.filter(d => {
-      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+      // console.log(d);      return d.estadoBeneficio.toLowerCase().indexOf(val) !== -1 || !val;
     });
     // update the rows
     this.rows = temp;
     // Whenever the filter changes, always go back to the first page
-    // this.table.offset = 0;
+    this.table.offset = 0;
   }
 }

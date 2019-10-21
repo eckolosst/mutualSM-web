@@ -1,14 +1,32 @@
-<div dir="rtl">
-  <mat-button-toggle-group appearance="legacy">
-    <mat-button-toggle (click)="selectTab('r')">Rechazadas</mat-button-toggle>
-    <mat-button-toggle (click)="selectTab('a')">Aprobadas</mat-button-toggle>
-    <mat-button-toggle (click)="selectTab('p')" checked="true"
-      >Pendientes</mat-button-toggle
-    >
-    <mat-button-toggle (click)="selectTab('x')">Todos</mat-button-toggle>
-  </mat-button-toggle-group>
-</div>
+<div fxLayout="column">
+  <div fxFlex="100" fxLayoutAlign="space-between start">
+    <mat-form-field class="ml-1" fxFlex="40">
+      <input matInput placeholder="Filtrar" (keyup)="updateFilter($event)" type="text" />
+    </mat-form-field>
 
-<button mat-fab color="primary" class="floatButton" (click)="openDialogForm()">
-  <mat-icon>add</mat-icon>
-</button>
+    <mat-button-toggle-group appearance="legacy">
+      <mat-button-toggle (click)="selectTab('r')">Rechazadas</mat-button-toggle>
+      <mat-button-toggle (click)="selectTab('a')">Aprobadas</mat-button-toggle>
+      <mat-button-toggle (click)="selectTab('p')" checked="true">Pendientes</mat-button-toggle>
+      <mat-button-toggle (click)="selectTab('x')">Todos</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+
+  <ngx-datatable
+    fxFlex="100"
+    #table
+    class="material m-1"
+    [columns]="columns"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [limit]="10"
+    [rows]="rows"
+  >
+  </ngx-datatable>
+
+  <button mat-fab color="primary" class="floatButton" (click)="openDialogForm()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

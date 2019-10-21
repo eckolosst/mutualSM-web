@@ -16,4 +16,12 @@ export class SolicitudPrestamoService {
   insertSolicitud(data: SolicitudPrestamo) {
     return this.httpClient.post<SolicitudPrestamo>(`${this.url}solicitudPrestamo`, data);
   }
+
+  getSolicitudes() {
+    return this.httpClient.get<[SolicitudPrestamo]>(`${this.url}solicitudPrestamo`);
+  }
+
+  getSolicitudesByState(estado: string) {
+    return this.httpClient.get<[SolicitudPrestamo]>(`${this.url}solicitudPrestamo?resulltado=${estado}`);
+  }
 }

@@ -16,30 +16,16 @@
   </mat-form-field> -->
 
   <mat-form-field fxFlex="40">
-    <input
-      matInput
-      [matAutocomplete]="auto"
-      placeholder="Socio"
-      name="socio"
-      formControlName="socio"
-    />
+    <input matInput [matAutocomplete]="auto" placeholder="Socio" name="socio" formControlName="socio" />
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option
-        *ngFor="let item of sociosFiltrados | async"
-        [value]="item.apellido"
-      >
+      <mat-option *ngFor="let item of sociosFiltrados | async" [value]="item.apellido">
         {{ item.apellido }}, {{ item.nombre }}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
 
   <mat-form-field fxFlex="29">
-    <input
-      matInput
-      [matDatepicker]="dateP"
-      placeholder="Fecha de Petición"
-      formControlName="fechaPeticion"
-    />
+    <input matInput [matDatepicker]="dateP" placeholder="Fecha de Petición" formControlName="fechaPeticion" />
     <mat-datepicker-toggle matSuffix [for]="dateP"></mat-datepicker-toggle>
     <mat-datepicker #dateP></mat-datepicker>
   </mat-form-field>
@@ -48,32 +34,23 @@
     <input matInput placeholder="monto" value="0" type="number" />
   </mat-form-field>
 
-  <div fxLayout="row" fxLayoutAlign="start center" fxFlex="100">
-    <mat-checkbox
-      [(ngModel)]="newGuarantor"
-      [ngModelOptions]="{ standalone: true }"
+  <div fxLayout="column" fxLayoutAlign="start start" fxFlex="100">
+    <mat-checkbox [(ngModel)]="newGuarantor" [ngModelOptions]="{ standalone: true }" class="mb-1"
       >Garante nuevo</mat-checkbox
     >
-    <span fxFlex="5"></span>
 
-    <mat-form-field *ngIf="!newGuarantor" fxFlex>
+    <mat-form-field *ngIf="!newGuarantor" class="fullwidth">
       <mat-select placeholder="Garante" name="item" formControlName="socio">
-        <mat-option *ngFor="let item of socios" [value]="item">
-          {{ item.apellido }}, {{ item.nombre }}
-        </mat-option>
+        <mat-option *ngFor="let item of socios" [value]="item"> {{ item.apellido }}, {{ item.nombre }} </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-expansion-panel *ngIf="newGuarantor" fxFlex>
+    <mat-expansion-panel *ngIf="newGuarantor">
       <mat-expansion-panel-header>
         Datos del nuevo Garante
       </mat-expansion-panel-header>
 
-      <form
-        [formGroup]="guarantorForm"
-        fxLayout="row wrap"
-        fxLayoutAlign="space-between center"
-      >
+      <form [formGroup]="guarantorForm" fxLayout="row wrap" fxLayoutAlign="space-between center">
         <mat-form-field>
           <input matInput placeholder="Apellido" formControlName="apellido" />
         </mat-form-field>
@@ -81,56 +58,28 @@
           <input matInput placeholder="Nombre" formControlName="nombre" />
         </mat-form-field>
         <mat-form-field>
-          <input
-            matInput
-            placeholder="DNI"
-            type="number"
-            formControlName="dni"
-          />
+          <input matInput placeholder="DNI" type="number" formControlName="dni" />
         </mat-form-field>
         <mat-form-field>
-          <input
-            matInput
-            [matDatepicker]="dateN"
-            placeholder="Fecha de Nacimiento"
-            formControlName="fechaNacimiento"
-          />
-          <mat-datepicker-toggle
-            matSuffix
-            [for]="dateN"
-          ></mat-datepicker-toggle>
+          <input matInput [matDatepicker]="dateN" placeholder="Fecha de Nacimiento" formControlName="fechaNacimiento" />
+          <mat-datepicker-toggle matSuffix [for]="dateN"></mat-datepicker-toggle>
           <mat-datepicker #dateN></mat-datepicker>
         </mat-form-field>
         <mat-form-field>
           <input matInput placeholder="Domicilio" formControlName="domicilio" />
         </mat-form-field>
         <mat-form-field>
-          <input
-            matInput
-            placeholder="Email"
-            type="email"
-            formControlName="email"
-          />
+          <input matInput placeholder="Email" type="email" formControlName="email" />
         </mat-form-field>
         <mat-form-field>
-          <input
-            matInput
-            placeholder="Telefono"
-            type="number"
-            formControlName="telefono"
-          />
+          <input matInput placeholder="Telefono" type="number" formControlName="telefono" />
         </mat-form-field>
       </form>
     </mat-expansion-panel>
   </div>
 
   <div fxFlex="100">
-    <button
-      mat-raised-button
-      type="submit"
-      color="primary"
-      [disabled]="prestamoForm.status == 'INVALID'"
-    >
+    <button mat-raised-button type="submit" color="primary" [disabled]="prestamoForm.status == 'INVALID'">
       Guardar
     </button>
     <span fxFlex="2"></span>
