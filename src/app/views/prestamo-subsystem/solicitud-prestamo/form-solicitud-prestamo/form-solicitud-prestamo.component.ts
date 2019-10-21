@@ -1,11 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { SocioService } from 'src/app/shared/services/socio.service';
 import { Socio } from 'src/app/shared/models/socio';
 import { SolicitudPrestamoService } from 'src/app/shared/services/solicitud-prestamo.service';
@@ -34,7 +29,7 @@ export class FormSolicitudPrestamoComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.sociosCtrl = new FormControl();
-    this.socios = this.sociosService.getSocios();
+    this.socios = this.sociosService.getHardCodedSocios();
     this.newGuarantor = false;
     this.sociosFiltrados = this.sociosCtrl.valueChanges.pipe(
       startWith(''),
@@ -75,8 +70,6 @@ export class FormSolicitudPrestamoComponent implements OnInit {
 
   private _sociosFiltrados(value: string) {
     const filterValue = value.toLowerCase();
-    return this.socios.filter(
-      socio => socio.nombre.toLowerCase().indexOf(filterValue) === 0
-    );
+    return this.socios.filter(socio => socio.nombre.toLowerCase().indexOf(filterValue) === 0);
   }
 }

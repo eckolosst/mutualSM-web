@@ -14,7 +14,6 @@ export class SolicitudPrestamoService {
   }
 
   insertSolicitud(data: SolicitudPrestamo) {
-    /* petición http POST */
-    return this.httpClient.post<SolicitudPrestamo>(this.url, data);
+    return this.httpClient.post<SolicitudPrestamo>(`${this.url}solicitudPrestamo`, data);
   }
 }
