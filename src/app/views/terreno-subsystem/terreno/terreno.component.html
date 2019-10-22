@@ -1,0 +1,86 @@
+<div class="container">
+    <div class="pd-x-20 pd-sm-x-30 pd-t-20 pd-sm-t-30" style="margin-left:40%">
+        <h4 class="tx-gray-800 mg-b-5">TERRENOS</h4>
+    </div>
+        
+
+    <div class="br-pagebody pd-x-20 pd-sm-x-30">
+        <div class="row row-sm">
+            <div class="col-lg-12">
+                <div class="card card-default mb-3">
+                    <div class="card-header">
+                        <h6 style="text-decoration: none;color: #333;">
+                            <strong style="text-decoration: none;color: #333;">Administración de Terrenos
+                                <button type="button" class="btn btn-primary" style="margin-left: 80%;" iconName="thumbs-up">NUEVO
+
+                                </button>
+
+                               
+                            </strong>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card-body">
+        <p-table [responsive]="true" #dt [columns]="cols" [value]="terrenos" selectionMode="single" [paginator]="true"
+            [rows]="12" [(selection)]="selectedTerreno">
+            <ng-template pTemplate="caption">
+                <div style="text-align: right">
+                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                    <input type="text" pInputText size="50" placeholder="Filtro"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        style="width:auto">
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns">
+                        {{col.header}}
+                    </th>
+                </tr>
+                <tr>
+                    
+                    <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                        <input *ngSwitchCase="'numero'" pInputText type="text"
+                            (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                            style="width:100%">
+                        <input *ngSwitchCase="'largo'" pInputText type="text"
+                            (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                            style="width:100%">
+                        <input *ngSwitchCase="'frente'" pInputText type="text"
+                            (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                            style="width:100%">
+                        <input *ngSwitchCase="'direccion'" pInputText type="text"
+                            (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                            style="width:100%">
+                        <input *ngSwitchCase="'valor'" pInputText type="text"
+                            (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                            style="width:100%">
+                        <input *ngSwitchCase="'matricula'" pInputText type="text"
+                            (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                            style="width:100%">
+                        
+
+                    </th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-medico let-columns="columns">
+                <tr [pSelectableRow]="medico">
+                    <td *ngFor="let col of columns">
+                        <div *ngIf='medico[col.field] && col.field=="fecha_nacimiento"'>
+                            {{medico[col.field] | date: 'dd/MM/yyyy'}}
+                        </div>
+                        <div *ngIf='medico[col.field] && col.field!="fecha_nacimiento"'>
+                            {{medico[col.field]}}
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

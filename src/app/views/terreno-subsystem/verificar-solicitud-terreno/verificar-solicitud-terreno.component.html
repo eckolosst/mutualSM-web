@@ -1,0 +1,115 @@
+        <div class="card card-default mb-3" >
+            <div class="card-header">
+                <div>
+                    <h6 style="text-decoration: none;color: #333;"> <strong class="float-left">Administrar Solicitudes de terrenos</strong>
+                        <button *ngIf="selectedSolicitud" pButton class="ui-button-rounded float-right" label="Aprobar/Rechazar solicitud" icon="fas fa-plus"
+                        data-toggle="modal" data-target="#modalAprobarSolicitudT">
+                        </button>
+                    </h6>
+                </div>
+            </div>
+            <div class="card-body">
+                <p-table [responsive]="true" #dt [columns]="colsS" [value]="solicitudes" selectionMode="single" [paginator]="true"
+                    [rows]="12" [(selection)]="selectedSolicitud">
+                    <ng-template pTemplate="caption">
+                        <div style="text-align: right">
+                            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                            <input type="text" pInputText size="50" placeholder="Filtro"
+                                (input)="dt.filterGlobal($event.target.value, 'contains')"
+                                style="width:auto">
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th *ngFor="let col of columns">
+                                {{col.header}}
+                            </th>
+                        </tr>
+                        <tr>
+                            
+                            <th *ngFor="let col of columns" [ngSwitch]="col.field">
+                                <input *ngSwitchCase="'numero'" pInputText type="text"
+                                    (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                                    style="width:100%">
+                                <input *ngSwitchCase="'fecha_peticion'" pInputText type="text"
+                                    (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                                    style="width:100%">
+                                <input *ngSwitchCase="'fecha_aprobacion_rechazo'" pInputText type="text"
+                                    (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                                    style="width:100%">
+                                <input *ngSwitchCase="'resultado'" pInputText type="text"
+                                    (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                                    style="width:100%">
+                                <input *ngSwitchCase="'numeroSocio'" pInputText type="text"
+                                    (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                                    style="width:100%">
+                                <input *ngSwitchCase="'numeroGarante'" pInputText type="text"
+                                    (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                                    style="width:100%">
+                                    <input *ngSwitchCase="'nombreLoteo'" pInputText type="text"
+                                    (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                                    style="width:100%">
+                                 
+        
+        
+                            </th>
+                        </tr>
+                    </ng-template>
+        
+                    <ng-template pTemplate="body" let-medico let-columns="columns">
+                        <tr [pSelectableRow]="medico">
+                            <td *ngFor="let col of columns">
+                                    <div *ngIf='medico[col.field] && col.field!="fecha_nacimiento" && col.field!="fecha_peticion" && col.field!="fecha_aprobacion_rechazo"'>
+                                            {{medico[col.field]}}
+                                        </div>
+                                <div *ngIf='medico[col.field] && col.field=="fecha_nacimiento"'>
+                                    {{medico[col.field] | date: 'dd/MM/yyyy'}}
+                                </div>
+                                <div *ngIf='medico[col.field] && col.field=="fecha_peticion"'>
+                                    {{medico[col.field] | date: 'dd/MM/yyyy'}}
+                                </div>
+                                <div *ngIf='medico[col.field] && col.field=="fecha_aprobacion_rechazo"'>
+                                    {{medico[col.field] | date: 'dd/MM/yyyy'}}
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        
+        </div>
+        
+
+
+
+<!-- ============================================================== -->
+<!-- MODAL ASIGNAR -->
+<!-- ============================================================== -->
+<div class="modal fade" id="modalAprobarSolicitudT" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Aprobar Solicitud</h5>
+            <button  type="button" class="close" data-dismiss="modal" aria-label="Close" #cerrarAsignar>
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+       
+            <div class="modal-footer" *ngIf ="selectedSolicitud.resultado!='Aprobado' && selectedSolicitud.resultado!='Rechazado'">
+                <button pButton class="ui-button-rounded ui-button-success" label="Aceptar" icon="fas fa-check"
+                    (click)="aceptar()">
+                </button>
+
+                <button pButton class="ui-button-rounded ui-button-success" label="Rechazar" icon="fas fa-check"
+                   (click)="rechazar()">
+                </button>
+            </div>
+
+            <div class="modal-footer" *ngIf ="selectedSolicitud.resultado=='Aprobado' || selectedSolicitud.resultado =='Rechazado'">
+                  <h4>La solicitud ya fue aprobada/rechazada</h4>
+                </div>
+  
+    </div>
+</div>
+</div>

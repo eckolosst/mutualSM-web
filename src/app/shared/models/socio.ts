@@ -8,4 +8,5 @@ export class Socio extends Persona {
   // periodoAfiliacion: Periodo;
   inicioPeriodo: Date;
   finPeriodo: Date;
+   
 }

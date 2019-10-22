@@ -21,17 +21,20 @@ import {
   MatCheckboxModule,
   MatExpansionModule
 } from '@angular/material';
+import { VerSolicitudTerrenoComponent } from './terreno/ver-solicitud-terreno/ver-solicitud-terreno.component';
 
 const components = [
   PrestamoComponent,
   SolicitudPrestamoComponent,
   FormSolicitudPrestamoComponent,
-  ResolverSolicitudComponent
+  ResolverSolicitudComponent,
+  VerSolicitudTerrenoComponent,
+  
 ];
 
 @NgModule({
   declarations: components,
-  imports: [
+  imports: [FormsModule,ReactiveFormsModule,
     CommonModule,
     NgxDatatableModule,
     FormsModule,

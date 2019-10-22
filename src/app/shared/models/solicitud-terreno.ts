@@ -3,4 +3,6 @@ import { Loteo } from './loteo';
 
 export class SolicitudTerreno extends Solicitud {
   loteo: Loteo;
+    numeroSocio: any;
+
 }
