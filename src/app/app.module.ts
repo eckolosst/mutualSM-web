@@ -9,10 +9,9 @@ import { TerrenoSubsystemModule } from './views/terreno-subsystem/terreno-subsys
 import { PrestamoSubsystemModule } from './views/prestamo-subsystem/prestamo-subsystem.module';
 import { CommonsModule } from './views/commons/commons.module';
 import { HttpClientModule } from '@angular/common/http';
-import { ResolverSolicitudComponent } from './views/solicitud-prestamo/resolver-solicitud/resolver-solicitud.component';
 
 @NgModule({
-  declarations: [AppComponent, ResolverSolicitudComponent],
+  declarations: [AppComponent],
   imports: [
     MatSidenavModule,
     TerrenoSubsystemModule,
