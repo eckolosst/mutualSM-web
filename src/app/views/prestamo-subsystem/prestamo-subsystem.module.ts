@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PrestamoComponent } from './prestamo/prestamo.component';
 import { SolicitudPrestamoComponent } from './solicitud-prestamo/solicitud-prestamo.component';
 import { FormSolicitudPrestamoComponent } from './solicitud-prestamo/form-solicitud-prestamo/form-solicitud-prestamo.component';
+import { ResolverSolicitudComponent } from './solicitud-prestamo/resolver-solicitud/resolver-solicitud.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -21,7 +22,12 @@ import {
   MatExpansionModule
 } from '@angular/material';
 
-const components = [PrestamoComponent, SolicitudPrestamoComponent, FormSolicitudPrestamoComponent];
+const components = [
+  PrestamoComponent,
+  SolicitudPrestamoComponent,
+  FormSolicitudPrestamoComponent,
+  ResolverSolicitudComponent
+];
 
 @NgModule({
   declarations: components,
@@ -45,6 +51,6 @@ const components = [PrestamoComponent, SolicitudPrestamoComponent, FormSolicitud
     MatExpansionModule
   ],
   exports: components,
-  entryComponents: [FormSolicitudPrestamoComponent]
+  entryComponents: [FormSolicitudPrestamoComponent, ResolverSolicitudComponent]
 })
 export class PrestamoSubsystemModule {}
