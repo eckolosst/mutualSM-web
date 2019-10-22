@@ -29,14 +29,6 @@
     <span>Prestamos</span>
   </a>
   <a
-    mat-list-item
-    [routerLink]="['/sol_prestamo']"
-    [routerLinkActive]="['router-link-active']"
-  >
-    <mat-icon>money</mat-icon>
-    <span>Solicitud de Prestamos</span>
-  </a>
-  <a
   mat-list-item
   [routerLink]="['/terreno']"
   [routerLinkActive]="['router-link-active']"
@@ -44,21 +36,22 @@
   <mat-icon>business</mat-icon>
   <span>Terrenos</span>
 </a>
-<a
-mat-list-item
-[routerLink]="['/sol_terreno']"
-[routerLinkActive]="['router-link-active']"
->
-<mat-icon>border_left</mat-icon>
-<span>Asignar Solicitud de Terrenos</span>
-</a>
+  <a
+    mat-list-item
+    [routerLink]="['/sol_prestamo']"
+    [routerLinkActive]="['router-link-active']"
+  >
+    <mat-icon>money</mat-icon>
+    <span>Solicitud de Prestamos</span>
+  </a>
+
 <a
 mat-list-item
 [routerLink]="['/ver_sol_terreno']"
 [routerLinkActive]="['router-link-active']"
 >
 <mat-icon>border_left</mat-icon>
-<span>Ver Solicitud de Terrenos</span>
+<span>Solicitud de Terrenos</span>
 </a>
 <a
 mat-list-item

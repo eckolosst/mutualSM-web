@@ -22,11 +22,13 @@ import {
   MatExpansionModule
 } from '@angular/material';
 import { VerSolicitudTerrenoComponent } from './terreno/ver-solicitud-terreno/ver-solicitud-terreno.component';
+import { FormSolicitudTerrenoComponent } from './form-solicitud-terreno/form-solicitud-terreno.component';
 
 const components = [
   PrestamoComponent,
   SolicitudPrestamoComponent,
   FormSolicitudPrestamoComponent,
+  FormSolicitudTerrenoComponent,
   ResolverSolicitudComponent,
   VerSolicitudTerrenoComponent,
   
@@ -54,6 +56,6 @@ const components = [
     MatExpansionModule
   ],
   exports: components,
-  entryComponents: [FormSolicitudPrestamoComponent, ResolverSolicitudComponent]
+  entryComponents: [FormSolicitudPrestamoComponent, ResolverSolicitudComponent,FormSolicitudTerrenoComponent]
 })
 export class PrestamoSubsystemModule {}
