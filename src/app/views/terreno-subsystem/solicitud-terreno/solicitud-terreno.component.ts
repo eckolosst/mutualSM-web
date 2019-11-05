@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material';
 import { FormSolicitudTerrenoComponent } from './form-solicitud-terreno/form-solicitud-terreno.component';
 import { SolicitudTerrenoService } from 'src/app/shared/services/solicitud-terreno.service';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { DetalleSolicitudTerrenoComponent } from './detalle-solicitud-terreno/detalle-solicitud-terreno.component';
 
 const columnas = [
   { prop: 'numero' },
@@ -15,18 +17,21 @@ const columnas = [
 @Component({
   selector: 'app-solicitud-terreno',
   templateUrl: './solicitud-terreno.component.html',
-  styleUrls: ['./solicitud-terreno.component.sccs']
+  styleUrls: ['./solicitud-terreno.component.scss']
 })
 export class SolicitudTerrenoComponent implements OnInit {
   public rows;
   public columns;
   public temp;
+ 
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
+  solicitudesTerrenos: any[];
 
   constructor(
     private dialog: MatDialog,
-    private _solicitudService: SolicitudTerrenoService
+    private _solicitudService: SolicitudTerrenoService,
   ) {
+   
     this.rows = [];
     this.columns = columnas;
     this.temp = [];
@@ -34,6 +39,9 @@ export class SolicitudTerrenoComponent implements OnInit {
 
   ngOnInit() {
     this.getSolicitudesByEstado('pendiente');
+    this.solicitudesTerrenos = SolicitudTerrenoService.getHardCodedSolicitudesTerrenos();
+    this.rows = this.solicitudesTerrenos;
+    
   }
 
   getSolicitudes() {
@@ -91,5 +99,14 @@ export class SolicitudTerrenoComponent implements OnInit {
     this.rows = temp;
     // Whenever the filter changes, always go back to the first page
     this.table.offset = 0;
+  }
+
+  onActivateRow(event) {
+    if (event.type === 'click') {
+      const dialogRef = this.dialog.open(DetalleSolicitudTerrenoComponent, {
+        width: '500px',
+        data: event.row
+      });
+    }
   }
 }

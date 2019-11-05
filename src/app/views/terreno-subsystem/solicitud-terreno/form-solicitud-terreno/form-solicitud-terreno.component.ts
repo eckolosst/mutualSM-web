@@ -12,34 +12,45 @@ import { SolicitudTerrenoService } from 'src/app/shared/services/solicitud-terre
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { GaranteService } from 'src/app/shared/services/garante.service';
+import { LoteoService } from 'src/app/shared/services/loteo.service';
 
 @Component({
   selector: 'app-form-solicitud-terreno',
   templateUrl: './form-solicitud-terreno.component.html',
-  styleUrls: ['./form-solicitud-terreno.component.sccs']
+  styleUrls: ['./form-solicitud-terreno.component.scss']
 })
 export class FormSolicitudTerrenoComponent implements OnInit {
   public terrenoForm: FormGroup;
   public guarantorForm: FormGroup;
   public socios: any[];
+  public loteos: any[];
   public sociosFiltrados: Observable<any[]>;
+  public loteosFiltrados: Observable<any[]>;
   public newGuarantor: boolean;
   public sociosCtrl: FormControl;
+  public loteosCtrl: FormControl;
 
   constructor(
     public dialogRef: MatDialogRef<FormSolicitudTerrenoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private sociosService: SocioService,
+    private loteosService: LoteoService,
     private solicitudTerrenoService: SolicitudTerrenoService,
     private garanteSercice: GaranteService,
     private formBuilder: FormBuilder
   ) {
     this.sociosCtrl = new FormControl();
+    this.loteosCtrl = new FormControl();
     this.socios = this.sociosService.getHardCodedSocios();
+    this.loteos = this.loteosService.getHardCodedLoteos();
     this.newGuarantor = false;
     this.sociosFiltrados = this.sociosCtrl.valueChanges.pipe(
       startWith(''),
       map(socio => (socio ? this._sociosFiltrados(socio) : this.socios.slice()))
+    );
+    this.loteosFiltrados = this.loteosCtrl.valueChanges.pipe(
+      startWith(''),
+      map(loteo => (loteo ? this._loteosFiltrados(loteo) : this.loteos.slice()))
     );
   }
 
@@ -50,7 +61,7 @@ export class FormSolicitudTerrenoComponent implements OnInit {
       socio: [null],
       garante: [null],
       recibos: [null, Validators.required],
-      monto: [null, [Validators.required]]
+      loteo:[null]
     });
     this.guarantorForm = this.formBuilder.group({
       dni: [null, Validators.required],
@@ -85,6 +96,12 @@ export class FormSolicitudTerrenoComponent implements OnInit {
     const filterValue = value.toLowerCase();
     return this.socios.filter(
       socio => socio.nombre.toLowerCase().indexOf(filterValue) === 0
+    );
+  }
+  private _loteosFiltrados(value: string) {
+    const filterValue = value.toLowerCase();
+    return this.loteos.filter(
+      loteo => loteo.nombre.toLowerCase().indexOf(filterValue) === 0
     );
   }
 }

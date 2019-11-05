@@ -7,7 +7,9 @@ const columnas = [
   { name: 'Socio' },
   { name: 'EstadoBeneficio' },
   { name: 'Garante' },
-  { name: 'Terreno' }
+  { name: 'largo' },
+  { name: 'ancho' },
+  { name: 'direccion' }
 ];
 
 @Component({

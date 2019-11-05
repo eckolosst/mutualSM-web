@@ -25,10 +25,10 @@
     />
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option
-        *ngFor="let item of sociosFiltrados | async"
-        [value]="item.apellido"
+        *ngFor="let i of sociosFiltrados | async"
+        [value]="i.apellido"
       >
-        {{ item.apellido }}, {{ item.nombre }}
+        {{ i.apellido }}, {{ i.nombre }}
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
@@ -44,11 +44,9 @@
     <mat-datepicker #dateP></mat-datepicker>
   </mat-form-field>
 
-  <mat-form-field fxFlex="25">
-    <input matInput placeholder="monto" value="0" type="number" />
-  </mat-form-field>
 
-  <div fxLayout="column" fxLayoutAlign="start start" fxFlex="100">
+
+  <div fxLayout="column" fxLayoutAlign="start start" fxFlex="1000">
     <mat-checkbox
       [(ngModel)]="newGuarantor"
       [ngModelOptions]="{ standalone: true }"
@@ -89,6 +87,9 @@
           />
         </mat-form-field>
         <mat-form-field>
+          <input matInput placeholder="Cuil" formControlName="cuil" />
+        </mat-form-field>
+        <mat-form-field>
           <input
             matInput
             [matDatepicker]="dateN"
@@ -119,20 +120,19 @@
             type="number"
             formControlName="telefono"
           />
-        </mat-form-field>
-
-        <div fxLayout="column" class="divFile">
-          <p class="mat-form-field">Fotos de Recibo de Sueldo</p>
-          <input multiple type="file" name="" id="inputFile" [hidden]="true" />
-          <label
-            for="inputFile"
-            class="mat-button mat-raised-button mat-primary"
-            >Elegir Archivos</label
-          >
-        </div>
+        </mat-form-field> 
+     
       </form>
     </mat-expansion-panel>
   </div>
+
+  <mat-form-field>
+  <mat-select placeholder="Loteo" name="item" formControlName="socio">
+    <mat-option *ngFor="let item of loteos" [value]="item">
+      {{ item.nombre }}
+    </mat-option>
+  </mat-select>
+</mat-form-field> 
 
   <div fxFlex="100">
     <button

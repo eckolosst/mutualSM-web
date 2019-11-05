@@ -20,11 +20,13 @@ import {
   MatCheckboxModule,
   MatExpansionModule
 } from '@angular/material';
+import { DetalleSolicitudTerrenoComponent } from './solicitud-terreno/detalle-solicitud-terreno/detalle-solicitud-terreno.component';
 
 const components = [
   TerrenoComponent,
   SolicitudTerrenoComponent,
   FormSolicitudTerrenoComponent,
+  DetalleSolicitudTerrenoComponent
  
 ];
 
