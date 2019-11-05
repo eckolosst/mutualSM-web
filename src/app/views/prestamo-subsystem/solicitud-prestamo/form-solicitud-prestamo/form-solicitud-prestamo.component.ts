@@ -1,12 +1,17 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl
+} from '@angular/forms';
 import { SocioService } from 'src/app/shared/services/socio.service';
 import { Socio } from 'src/app/shared/models/socio';
 import { SolicitudPrestamoService } from 'src/app/shared/services/solicitud-prestamo.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { SolicitudPrestamo } from 'src/app/shared/models/solicitud-prestamo';
+import { GaranteService } from 'src/app/shared/services/garante.service';
 
 @Component({
   selector: 'app-form-solicitud-prestamo',
@@ -27,6 +32,7 @@ export class FormSolicitudPrestamoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private sociosService: SocioService,
     private solicitudPrestamoService: SolicitudPrestamoService,
+    private garanteSercice: GaranteService,
     private formBuilder: FormBuilder
   ) {
     this.sociosCtrl = new FormControl();
@@ -88,6 +94,8 @@ export class FormSolicitudPrestamoComponent implements OnInit {
 
   private _sociosFiltrados(value: string) {
     const filterValue = value.toLowerCase();
-    return this.socios.filter(socio => socio.nombre.toLowerCase().indexOf(filterValue) === 0);
+    return this.socios.filter(
+      socio => socio.nombre.toLowerCase().indexOf(filterValue) === 0
+    );
   }
 }

@@ -30,7 +30,12 @@ export class SocioComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.rows = this.socioService.getHardCodedSocios();
+    this.socioService.getSocios().subscribe(
+      result => {
+        this.rows = result;
+      },
+      error => console.error(error)
+    );
   }
 
   onActivateRow(event) {

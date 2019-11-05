@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { FormSolicitudPrestamoComponent } from './form-solicitud-prestamo/form-solicitud-prestamo.component';
 import { SolicitudPrestamoService } from 'src/app/shared/services/solicitud-prestamo.service';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { ResolverSolicitudComponent } from './resolver-solicitud/resolver-solicitud.component';
 
 const columnas = [
   { prop: 'numero' },
@@ -23,7 +24,10 @@ export class SolicitudPrestamoComponent implements OnInit {
   public temp;
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
-  constructor(private dialog: MatDialog, private _solicitudService: SolicitudPrestamoService) {
+  constructor(
+    private dialog: MatDialog,
+    private _solicitudService: SolicitudPrestamoService
+  ) {
     this.rows = [];
     this.columns = columnas;
     this.temp = [];
@@ -57,6 +61,14 @@ export class SolicitudPrestamoComponent implements OnInit {
     const dialogRef = this.dialog.open(FormSolicitudPrestamoComponent, {
       width: '750px',
       maxHeight: '700px'
+    });
+  }
+
+  openDialogSolve() {
+    // TODO: add util data to openiDialog function
+    const dialogRef = this.dialog.open(ResolverSolicitudComponent, {
+      data: {},
+      width: '750px'
     });
   }
 

@@ -25,7 +25,12 @@
   </mat-form-field> -->
 
   <mat-form-field fxFlex="29">
-    <input matInput [matDatepicker]="dateP" placeholder="Fecha de Petición" formControlName="fechaPeticion" />
+    <input
+      matInput
+      [matDatepicker]="dateP"
+      placeholder="Fecha de Petición"
+      formControlName="fechaPeticion"
+    />
     <mat-datepicker-toggle matSuffix [for]="dateP"></mat-datepicker-toggle>
     <mat-datepicker #dateP></mat-datepicker>
   </mat-form-field>
@@ -104,7 +109,12 @@
   </div>
 
   <div fxFlex="100">
-    <button mat-raised-button type="submit" color="primary" [disabled]="prestamoForm.status == 'INVALID'">
+    <button
+      mat-raised-button
+      type="submit"
+      color="primary"
+      [disabled]="prestamoForm.status == 'INVALID'"
+    >
       Guardar
     </button>
     <span fxFlex="2"></span>
