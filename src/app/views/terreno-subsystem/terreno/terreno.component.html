@@ -1,0 +1,28 @@
+<!-- TODO: Se debería mostrar Nombre del socio en vez del número -->
+
+<div fxLayout="row wrap">
+    <div fxFlex="100" class="mt-1" fxLayoutAlign="center center">
+      <mat-form-field fxFlex="40">
+        <input
+          matInput
+          placeholder="Filtrar"
+          (keyup)="updateFilter($event)"
+          type="text"
+        />
+      </mat-form-field>
+    </div>
+    <ngx-datatable
+      fxFlex="100"
+      #table
+      class="material m-1"
+      [columns]="columns"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [limit]="10"
+      [rows]="rows"
+    >
+    </ngx-datatable>
+  </div>
+  
