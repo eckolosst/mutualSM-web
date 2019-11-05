@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { SolicitudPrestamo } from '../models/solicitud-prestamo';
 
@@ -22,6 +22,9 @@ export class SolicitudPrestamoService {
   }
 
   getSolicitudesByState(estado: string) {
-    return this.httpClient.get<[SolicitudPrestamo]>(`${this.url}solicitudPrestamo?resulltado=${estado}`);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+    return this.httpClient.get<[SolicitudPrestamo]>(`${this.url}solicitudprestamo?resultado=${estado}`, { headers });
   }
 }

@@ -7,22 +7,22 @@
   fxLayout="row wrap"
   fxLayoutAlign="space-between center"
 >
-  <!-- <mat-form-field fxFlex="40">
+  <mat-form-field fxFlex="40">
     <mat-select placeholder="Socio" name="socio" formControlName="socio">
-      <mat-option *ngFor="let item of socios" [value]="item">
+      <mat-option *ngFor="let item of socios" [value]="item.id">
         {{ item.apellido }}, {{ item.nombre }}
       </mat-option>
     </mat-select>
-  </mat-form-field> -->
+  </mat-form-field>
 
-  <mat-form-field fxFlex="40">
+<!--   <mat-form-field fxFlex="40">
     <input matInput [matAutocomplete]="auto" placeholder="Socio" name="socio" formControlName="socio" />
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option *ngFor="let item of sociosFiltrados | async" [value]="item.apellido">
+      <mat-option *ngFor="let item of sociosFiltrados | async" [value]="item.id">
         {{ item.apellido }}, {{ item.nombre }}
       </mat-option>
     </mat-autocomplete>
-  </mat-form-field>
+  </mat-form-field> -->
 
   <mat-form-field fxFlex="29">
     <input matInput [matDatepicker]="dateP" placeholder="Fecha de Petición" formControlName="fechaPeticion" />
@@ -31,51 +31,76 @@
   </mat-form-field>
 
   <mat-form-field fxFlex="25">
-    <input matInput placeholder="monto" value="0" type="number" />
+    <input matInput placeholder="monto" value="14000" type="number" formControlName="monto" />
   </mat-form-field>
 
   <div fxLayout="column" fxLayoutAlign="start start" fxFlex="100">
-    <mat-checkbox [(ngModel)]="newGuarantor" [ngModelOptions]="{ standalone: true }" class="mb-1"
+    <mat-checkbox [(ngModel)]="newGuarantor" [ngModelOptions]="{ standalone: true }" class="mb-1" color="primary"
       >Garante nuevo</mat-checkbox
     >
 
     <mat-form-field *ngIf="!newGuarantor" class="fullwidth">
-      <mat-select placeholder="Garante" name="item" formControlName="socio">
+      <mat-select placeholder="Garante" name="item" formControlName="garante">
         <mat-option *ngFor="let item of socios" [value]="item"> {{ item.apellido }}, {{ item.nombre }} </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-expansion-panel *ngIf="newGuarantor">
-      <mat-expansion-panel-header>
-        Datos del nuevo Garante
-      </mat-expansion-panel-header>
+    <div *ngIf="newGuarantor">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Datos del nuevo Garante
+        </mat-expansion-panel-header>
 
-      <form [formGroup]="guarantorForm" fxLayout="row wrap" fxLayoutAlign="space-between center">
-        <mat-form-field>
-          <input matInput placeholder="Apellido" formControlName="apellido" />
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Nombre" formControlName="nombre" />
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="DNI" type="number" formControlName="dni" />
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput [matDatepicker]="dateN" placeholder="Fecha de Nacimiento" formControlName="fechaNacimiento" />
-          <mat-datepicker-toggle matSuffix [for]="dateN"></mat-datepicker-toggle>
-          <mat-datepicker #dateN></mat-datepicker>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Domicilio" formControlName="domicilio" />
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Email" type="email" formControlName="email" />
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput placeholder="Telefono" type="number" formControlName="telefono" />
-        </mat-form-field>
-      </form>
-    </mat-expansion-panel>
+        <form [formGroup]="guarantorForm" fxLayout="row wrap" fxLayoutAlign="space-between center">
+          <mat-form-field>
+            <input matInput placeholder="Apellido" formControlName="apellido" />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Nombre" formControlName="nombre" />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="DNI" type="number" formControlName="dni" />
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput
+              [matDatepicker]="dateN"
+              placeholder="Fecha de Nacimiento"
+              formControlName="fechaNacimiento"
+            />
+            <mat-datepicker-toggle matSuffix [for]="dateN"></mat-datepicker-toggle>
+            <mat-datepicker #dateN></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Domicilio" formControlName="domicilio" />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Email" type="email" formControlName="email" />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Telefono" type="number" formControlName="telefono" />
+          </mat-form-field>
+        </form>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          Datos del Recibo de Sueldo
+        </mat-expansion-panel-header>
+
+        <form [formGroup]="paycheckForm" fxLayout="row wrap" fxLayoutAlign="space-between center">
+          <mat-form-field>
+            <input matInput placeholder="Sueldo Neto" type="number" formControlName="sueldoNeto" />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Sueldo Bruto" type="number" formControlName="sueldoBruto" />
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="CUIL" formControlName="cuil" />
+          </mat-form-field>
+        </form>
+      </mat-expansion-panel>
+    </div>
   </div>
 
   <div fxFlex="100">

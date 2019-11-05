@@ -55,7 +55,8 @@ export class SolicitudPrestamoComponent implements OnInit {
 
   openDialogForm() {
     const dialogRef = this.dialog.open(FormSolicitudPrestamoComponent, {
-      width: '750px'
+      width: '750px',
+      maxHeight: '700px'
     });
   }
 

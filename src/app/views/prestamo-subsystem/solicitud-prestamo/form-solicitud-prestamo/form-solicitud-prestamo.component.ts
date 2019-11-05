@@ -16,6 +16,7 @@ import { SolicitudPrestamo } from 'src/app/shared/models/solicitud-prestamo';
 export class FormSolicitudPrestamoComponent implements OnInit {
   public prestamoForm: FormGroup;
   public guarantorForm: FormGroup;
+  public paycheckForm: FormGroup;
   public socios: any[];
   public sociosFiltrados: Observable<any[]>;
   public newGuarantor: boolean;
@@ -29,7 +30,7 @@ export class FormSolicitudPrestamoComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.sociosCtrl = new FormControl();
-    this.socios = this.sociosService.getHardCodedSocios();
+    this.socios = [];
     this.newGuarantor = false;
     this.sociosFiltrados = this.sociosCtrl.valueChanges.pipe(
       startWith(''),
@@ -38,13 +39,19 @@ export class FormSolicitudPrestamoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.sociosService.getSocios().subscribe(
+      result => {
+        this.socios = result;
+      },
+      error => console.error(error)
+    );
     this.prestamoForm = this.formBuilder.group({
       fechaPeticion: [new Date(), Validators.required],
-      resultado: [null, Validators.required],
+      resultado: ['pendiente', Validators.required],
       socio: [null],
       garante: [null],
-      recibos: [null, Validators.required],
-      monto: [null, [Validators.required]]
+      recibos: [null],
+      monto: [null, Validators.required]
     });
     this.guarantorForm = this.formBuilder.group({
       dni: [null, Validators.required],
@@ -55,13 +62,24 @@ export class FormSolicitudPrestamoComponent implements OnInit {
       email: [null, [Validators.required, Validators.email]],
       telefono: [null, Validators.required]
     });
+    this.paycheckForm = this.formBuilder.group({
+      sueldoNeto: [null, Validators.required],
+      sueldoBruto: [null, Validators.required],
+      cuil: [null, Validators.required]
+    });
   }
 
   send() {
     if (this.newGuarantor) {
-      // this.garanteService.post();
+      this.prestamoForm.setControl('garante', new FormControl(this.guarantorForm.value));
+      this.prestamoForm.setControl('recibos', new FormControl(this.paycheckForm.value));
     }
-    this.solicitudPrestamoService.insertSolicitud(this.prestamoForm.value);
+    this.solicitudPrestamoService.insertSolicitud(this.prestamoForm.value).subscribe(
+      result => {
+        console.log(result);
+      },
+      error => console.error(error)
+    );
   }
 
   cancel() {
