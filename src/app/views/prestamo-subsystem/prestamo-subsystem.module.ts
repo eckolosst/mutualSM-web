@@ -19,7 +19,8 @@ import {
   MatButtonToggleModule,
   MatAutocompleteModule,
   MatCheckboxModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 const components = [
@@ -48,7 +49,8 @@ const components = [
     MatButtonToggleModule,
     MatAutocompleteModule,
     MatCheckboxModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatProgressSpinnerModule
   ],
   exports: components,
   entryComponents: [FormSolicitudPrestamoComponent, ResolverSolicitudComponent]

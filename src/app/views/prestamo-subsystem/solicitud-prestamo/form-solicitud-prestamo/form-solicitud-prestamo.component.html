@@ -1,6 +1,7 @@
 <h4>Nueva solicitud de Prestamo</h4>
 
 <form
+  *ngIf="!waiting; else spinner"
   class="mt-2"
   [formGroup]="prestamoForm"
   (ngSubmit)="send()"
@@ -9,13 +10,11 @@
 >
   <mat-form-field fxFlex="40">
     <mat-select placeholder="Socio" name="socio" formControlName="socio">
-      <mat-option *ngFor="let item of socios" [value]="item.id">
-        {{ item.apellido }}, {{ item.nombre }}
-      </mat-option>
+      <mat-option *ngFor="let item of socios" [value]="item.id"> {{ item.apellido }}, {{ item.nombre }} </mat-option>
     </mat-select>
   </mat-form-field>
 
-<!--   <mat-form-field fxFlex="40">
+  <!--   <mat-form-field fxFlex="40">
     <input matInput [matAutocomplete]="auto" placeholder="Socio" name="socio" formControlName="socio" />
     <mat-autocomplete #auto="matAutocomplete">
       <mat-option *ngFor="let item of sociosFiltrados | async" [value]="item.id">
@@ -25,12 +24,7 @@
   </mat-form-field> -->
 
   <mat-form-field fxFlex="29">
-    <input
-      matInput
-      [matDatepicker]="dateP"
-      placeholder="Fecha de Petición"
-      formControlName="fechaPeticion"
-    />
+    <input matInput [matDatepicker]="dateP" placeholder="Fecha de Petición" formControlName="fechaPeticion" />
     <mat-datepicker-toggle matSuffix [for]="dateP"></mat-datepicker-toggle>
     <mat-datepicker #dateP></mat-datepicker>
   </mat-form-field>
@@ -109,15 +103,14 @@
   </div>
 
   <div fxFlex="100">
-    <button
-      mat-raised-button
-      type="submit"
-      color="primary"
-      [disabled]="prestamoForm.status == 'INVALID'"
-    >
+    <button mat-raised-button type="submit" color="primary" [disabled]="prestamoForm.status == 'INVALID'">
       Guardar
     </button>
     <span fxFlex="2"></span>
     <button mat-stroked-button color="warn" (click)="cancel()">Cancelar</button>
   </div>
 </form>
+
+<ng-template #spinner>
+  <mat-spinner></mat-spinner>
+</ng-template>

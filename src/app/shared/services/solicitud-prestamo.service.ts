@@ -13,7 +13,7 @@ export class SolicitudPrestamoService {
     this.url = environment.url;
   }
 
-  insertSolicitud(data: SolicitudPrestamo) {
+  insertSolicitud(data) {
     return this.httpClient.post<SolicitudPrestamo>(`${this.url}solicitudPrestamo`, data);
   }
 

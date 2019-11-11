@@ -1,13 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl
-} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { SocioService } from 'src/app/shared/services/socio.service';
-import { Socio } from 'src/app/shared/models/socio';
 import { SolicitudPrestamoService } from 'src/app/shared/services/solicitud-prestamo.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -26,15 +20,16 @@ export class FormSolicitudPrestamoComponent implements OnInit {
   public sociosFiltrados: Observable<any[]>;
   public newGuarantor: boolean;
   public sociosCtrl: FormControl;
+  public waiting: boolean;
 
   constructor(
     public dialogRef: MatDialogRef<FormSolicitudPrestamoComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private sociosService: SocioService,
     private solicitudPrestamoService: SolicitudPrestamoService,
-    private garanteSercice: GaranteService,
     private formBuilder: FormBuilder
   ) {
+    this.waiting = false;
     this.sociosCtrl = new FormControl();
     this.socios = [];
     this.newGuarantor = false;
@@ -76,26 +71,25 @@ export class FormSolicitudPrestamoComponent implements OnInit {
   }
 
   send() {
+    this.waiting = true;
     if (this.newGuarantor) {
       this.prestamoForm.setControl('garante', new FormControl(this.guarantorForm.value));
       this.prestamoForm.setControl('recibos', new FormControl(this.paycheckForm.value));
     }
     this.solicitudPrestamoService.insertSolicitud(this.prestamoForm.value).subscribe(
       result => {
-        console.log(result);
+        this.dialogRef.close(true);
       },
       error => console.error(error)
     );
   }
 
   cancel() {
-    this.dialogRef.close();
+    this.dialogRef.close(false);
   }
 
   private _sociosFiltrados(value: string) {
     const filterValue = value.toLowerCase();
-    return this.socios.filter(
-      socio => socio.nombre.toLowerCase().indexOf(filterValue) === 0
-    );
+    return this.socios.filter(socio => socio.nombre.toLowerCase().indexOf(filterValue) === 0);
   }
 }

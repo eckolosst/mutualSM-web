@@ -24,7 +24,40 @@
     [limit]="10"
     [rows]="rows"
   >
+    <ngx-datatable-column name="socio">
+      <ng-template let-column="column" ngx-datatable-header-template>
+        Socio (DNI)
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <span>{{ row.socio.apellido }}, {{ row.socio.nombre }} ({{row.socio.dni}})</span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="garante">
+      <ng-template let-column="column" ngx-datatable-header-template>
+        Garante (DNI)
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <span>{{ row.garante.apellido }}, {{ row.garante.nombre }} ({{row.garante.dni}})</span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="monto">
+      <ng-template let-column="column" ngx-datatable-header-template>
+        Monto
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <span>{{ row.monto }}</span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="fechaPeticion">
+      <ng-template let-column="column" ngx-datatable-header-template>
+        Fecha Peticion
+      </ng-template>
+      <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+        <span>{{ row.fechaPeticion | date: 'dd/MM/yyyy' }}</span>
+      </ng-template>
+    </ngx-datatable-column>
   </ngx-datatable>
+  
 
   <button mat-fab color="primary" class="floatButton" (click)="openDialogForm()">
     <mat-icon>add</mat-icon>

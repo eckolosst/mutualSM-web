@@ -5,13 +5,7 @@ import { SolicitudPrestamoService } from 'src/app/shared/services/solicitud-pres
 import { DatatableComponent } from '@swimlane/ngx-datatable';
 import { ResolverSolicitudComponent } from './resolver-solicitud/resolver-solicitud.component';
 
-const columnas = [
-  { prop: 'numero' },
-  { name: 'Socio' },
-  { name: 'FechaPeticion' },
-  { name: 'Garante' },
-  { name: 'Monto' }
-];
+const columnas = [{ name: 'Socio' }, { name: 'FechaPeticion' }, { name: 'Garante' }, { name: 'Monto' }];
 
 @Component({
   selector: 'app-solicitud-prestamo',
@@ -24,10 +18,7 @@ export class SolicitudPrestamoComponent implements OnInit {
   public temp;
   @ViewChild(DatatableComponent, { static: false }) table: DatatableComponent;
 
-  constructor(
-    private dialog: MatDialog,
-    private _solicitudService: SolicitudPrestamoService
-  ) {
+  constructor(private dialog: MatDialog, private _solicitudService: SolicitudPrestamoService) {
     this.rows = [];
     this.columns = columnas;
     this.temp = [];
@@ -50,6 +41,7 @@ export class SolicitudPrestamoComponent implements OnInit {
   getSolicitudesByEstado(estado: string) {
     this._solicitudService.getSolicitudesByState(estado).subscribe(
       result => {
+        // console.log(result);
         this.temp = [...result];
         this.rows = result;
       },
@@ -61,6 +53,10 @@ export class SolicitudPrestamoComponent implements OnInit {
     const dialogRef = this.dialog.open(FormSolicitudPrestamoComponent, {
       width: '750px',
       maxHeight: '700px'
+    });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      console.log(dialogResult);
+      this.getSolicitudesByEstado('pendientes');
     });
   }
 
